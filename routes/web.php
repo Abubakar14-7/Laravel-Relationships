@@ -1,19 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
 use App\Http\Controllers\JobCategoryController;
 use App\Http\Controllers\JobController;
-=======
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\CourseController;
->>>>>>> 66f5c982ef3f96938e822563be7253c98d37fa23
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-<<<<<<< HEAD
 //////////////////////Job_Category//////////////////////
 
 Route::get('/job-categories', [JobCategoryController::class, 'index'])->name('job_categories.index');
@@ -31,7 +25,8 @@ Route::post('/jobs/store', [JobController::class, 'store'])->name('jobs.store');
 Route::get('/jobs/{id}/edit', [JobController::class, 'edit'])->name('jobs.edit');
 Route::put('/jobs/{id}/update', [JobController::class, 'update'])->name('jobs.update');
 Route::delete('/jobs/{id}/delete', [JobController::class, 'destroy'])->name('jobs.destroy');
-=======
+
+
 // Students CRUD
 Route::get('/students', [StudentController::class, 'index'])->name('student.index');     
 Route::get('/student/create', [StudentController::class, 'create'])->name('student.create'); 
@@ -40,6 +35,7 @@ Route::get('/students/edit/{id}', [StudentController::class, 'edit'])->name('stu
 Route::post('/students/update/{id}', [StudentController::class, 'update'])->name('student.update');   
 Route::get('/students/delete/{id}', [StudentController::class, 'delete'])->name('student.delete'); 
 
+
 // Courses CRUD
 Route::get('/courses', [CourseController::class, 'index'])->name('course.index');     
 Route::get('/course/create', [CourseController::class, 'create'])->name('course.create'); 
@@ -47,4 +43,3 @@ Route::post('/course/store', [CourseController::class, 'store'])->name('course.s
 Route::get('/course/edit/{id}', [CourseController::class, 'edit'])->name('course.edit');  
 Route::post('/course/update/{id}', [CourseController::class, 'update'])->name('course.update');   
 Route::get('/course/delete/{id}', [CourseController::class, 'delete'])->name('course.delete'); 
->>>>>>> 66f5c982ef3f96938e822563be7253c98d37fa23
