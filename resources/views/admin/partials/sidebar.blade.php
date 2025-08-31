@@ -8,19 +8,34 @@
                     Dashboard
                 </a>
                 <div class="sb-sidenav-menu-heading">Management</div>
+
+                
                 <a class="nav-link" href="{{route ('jobs.index') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     Jobs
                 </a>
+                
                 <a class="nav-link" href="{{route ('job_categories.index') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     Job Categories
                 </a>
+
+                <a class="nav-link" href="{{route ('student.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                    Students
+                </a>
+
+                <a class="nav-link" href="{{route ('course.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                    Courses
+                </a>
+
+
+
+
+
             </div>
         </div>
-        <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
-            Admin User
-        </div>
+
     </nav>
 </div>

@@ -1,3 +1,5 @@
+@extends('admin.layouts.master')
+@section('admin')
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,3 +51,4 @@
 
 </body>
 </html>
+@endsection
