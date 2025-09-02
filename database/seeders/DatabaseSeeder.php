@@ -15,8 +15,9 @@ class DatabaseSeeder extends Seeder
             JobSeeder::class, // ✅ Added
         ]);
         
-    $this->call(StudentSeeder::class);
     $this->call(CourseSeeder::class);
+    $this->call(StudentSeeder::class);
+    
 
 
     }

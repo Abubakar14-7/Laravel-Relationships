@@ -17,7 +17,7 @@
             margin-bottom: 20px;
         }
         .container {
-            max-width: 900px;
+            max-width: 100%;
             margin: auto;
             background: white;
             padding: 20px;
@@ -82,6 +82,8 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Course</th>
+                <th>Fee</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -92,6 +94,8 @@
         <td>{{ $student->name }}</td>
         <td>{{ $student->email ?? '—' }}</td>
         <td>{{ $student->phone ?? '—' }}</td>
+        <td>{{ $student->course->name  }}</td>
+        <td>{{ $student->course->fee ?? '—' }}</td>
         <td>
             <a href="{{ route('student.edit', $student->id) }}" class="btn btn-warning">Edit</a>
             <a href="{{ route('student.delete', $student->id) }}" class="btn btn-warning">Delete</a>
