@@ -10,5 +10,10 @@ class Job extends Model
 {
      use SoftDeletes; // ✅ Added
 
-    protected $fillable = ['title', 'description', 'location', 'salary'];
+    protected $fillable = ['title', 'description', 'location', 'salary', 'job_category_id'];
+
+     public function category()
+    {
+        return $this->belongsTo(JobCategory::class, 'job_category_id');
+    }
 }

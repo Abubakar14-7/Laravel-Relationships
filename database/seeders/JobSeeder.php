@@ -10,6 +10,7 @@ class JobSeeder extends Seeder
     public function run(): void
     {
         Job::create([
+            'job_category_id' => 1, // pehli category
             'title' => 'Software Engineer',
             'description' => 'Develop and maintain web applications.',
             'location' => 'Lahore',

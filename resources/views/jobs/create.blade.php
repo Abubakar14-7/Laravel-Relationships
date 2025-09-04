@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+
 @section('admin')
 <!DOCTYPE html>
 <html>
@@ -9,34 +10,68 @@
         h1 { margin-bottom: 20px; }
         form { max-width: 400px; }
         label { display: block; margin-top: 10px; }
-        input, textarea {
-            width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
         }
         button {
-            margin-top: 15px; padding: 8px 12px; border: none;
-            background: #28a745; color: white; border-radius: 4px; cursor: pointer;
+            margin-top: 15px;
+            padding: 8px 12px;
+            border: none;
+            background: #28a745;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
         }
         a { display: inline-block; margin-top: 10px; color: #007bff; }
     </style>
 </head>
 <body>
     <h1>Add New Job</h1>
+
+    {{-- validation error messages --}}
+    @if ($errors->any())
+        <div style="color:red;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="{{ route('jobs.store') }}" method="POST">
         @csrf
+
+        {{-- Category dropdown --}}
+        <label>Job Category</label>
+        <select name="job_category_id" required>
+            <option value="">-- Select Category --</option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}"
+                    {{ old('job_category_id') == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select>
+
         <label>Title:</label>
-        <input type="text" name="title" required>
+        <input type="text" name="title" value="{{ old('title') }}" required>
 
         <label>Description:</label>
-        <textarea name="description"></textarea>
+        <textarea name="description">{{ old('description') }}</textarea>
 
         <label>Location:</label>
-        <input type="text" name="location">
+        <input type="text" name="location" value="{{ old('location') }}">
 
         <label>Salary:</label>
-        <input type="number" name="salary" step="0.01">
+        <input type="number" name="salary" step="0.01" value="{{ old('salary') }}">
 
         <button type="submit">Save</button>
     </form>
+
     <a href="{{ route('jobs.index') }}">← Back to List</a>
 </body>
 </html>

@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+
 @section('admin')
 <!DOCTYPE html>
 <html>
@@ -9,21 +10,53 @@
         h1 { margin-bottom: 20px; }
         form { max-width: 400px; }
         label { display: block; margin-top: 10px; }
-        input, textarea {
-            width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
         }
         button {
-            margin-top: 15px; padding: 8px 12px; border: none;
-            background: #007bff; color: white; border-radius: 4px; cursor: pointer;
+            margin-top: 15px;
+            padding: 8px 12px;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
         }
         a { display: inline-block; margin-top: 10px; color: #007bff; }
     </style>
 </head>
 <body>
     <h1>Edit Job</h1>
+
+    {{-- show validation errors if any --}}
+    @if ($errors->any())
+        <div style="color:red;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="{{ route('jobs.update', $job->id) }}" method="POST">
         @csrf
         @method('PUT')
+
+        {{-- Category dropdown --}}
+        <label>Job Category</label>
+        <select name="job_category_id" required>
+            <option value="">-- Select Category --</option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}"
+                    {{ $job->job_category_id == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select>
 
         <label>Title:</label>
         <input type="text" name="title" value="{{ $job->title }}" required>
@@ -39,6 +72,7 @@
 
         <button type="submit">Update</button>
     </form>
+
     <a href="{{ route('jobs.index') }}">← Back to List</a>
 </body>
 </html>

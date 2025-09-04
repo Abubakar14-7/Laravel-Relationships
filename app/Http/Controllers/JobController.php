@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Models\JobCategory;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -10,24 +11,27 @@ class JobController extends Controller
     // Show all jobs
     public function index()
     {
-        $jobs = Job::all(); // soft deleted automatically hidden
+        // eager load category for each job
+        $jobs = Job::with('category')->get(); // soft deleted rows hidden
         return view('jobs.index', compact('jobs'));
     }
 
     // Show create form
     public function create()
     {
-        return view('jobs.create');
+        $categories = JobCategory::all(); // send to view for dropdown
+        return view('jobs.create', compact('categories'));
     }
 
     // Store new job
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'location' => 'required|string|max:255',
-            'salary' => 'required|numeric',
+            'job_category_id' => 'required|exists:job_categories,id',
+            'title'           => 'required|string|max:255',
+            'description'     => 'required|string',
+            'location'        => 'required|string|max:255',
+            'salary'          => 'required|numeric',
         ]);
 
         Job::create($request->all());
@@ -39,7 +43,8 @@ class JobController extends Controller
     public function edit($id)
     {
         $job = Job::findOrFail($id);
-        return view('jobs.edit', compact('job'));
+        $categories = JobCategory::all(); // for dropdown
+        return view('jobs.edit', compact('job', 'categories'));
     }
 
     // Update job
@@ -48,10 +53,11 @@ class JobController extends Controller
         $job = Job::findOrFail($id);
 
         $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'location' => 'required|string|max:255',
-            'salary' => 'required|numeric',
+            'job_category_id' => 'required|exists:job_categories,id',
+            'title'           => 'required|string|max:255',
+            'description'     => 'required|string',
+            'location'        => 'required|string|max:255',
+            'salary'          => 'required|numeric',
         ]);
 
         $job->update($request->all());
@@ -59,7 +65,7 @@ class JobController extends Controller
         return redirect()->route('jobs.index')->with('success', 'Job updated successfully!');
     }
 
-     // ✅ Soft delete job
+    // Soft delete job
     public function destroy($id)
     {
         $job = Job::findOrFail($id);
