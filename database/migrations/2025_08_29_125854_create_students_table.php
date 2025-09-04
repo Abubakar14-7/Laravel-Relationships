@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->unsignedBigInteger('course_id'); // foreign key
+            $table->foreign('course_id')->references('id')->on('courses');
             $table->timestamps();
         });
     }

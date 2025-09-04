@@ -10,17 +10,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-<<<<<<< HEAD
         $this->call([
             JobCategorySeeder::class, // ✅ Added
             JobSeeder::class, // ✅ Added
         ]);
-=======
         
-    $this->call(StudentSeeder::class);
     $this->call(CourseSeeder::class);
+    $this->call(StudentSeeder::class);
+    
 
 
->>>>>>> 66f5c982ef3f96938e822563be7253c98d37fa23
     }
 }
