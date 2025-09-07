@@ -56,9 +56,9 @@ class StudentController extends Controller
 
     public function edit($id)
     {
-
-        $students = Student::find($id);
-        return view('Student.edit', compact('students'));
+        $courses = Course::all();
+        $student = Student::find($id);
+        return view('Student.edit', compact('student','courses'));
     }
 
     public function update(Request $request, $id)
@@ -87,6 +87,7 @@ class StudentController extends Controller
         $students->name = $request->name;
         $students->email = $request->email;
         $students->phone = $request->phone;
+        $students->course_id = $request->course_id;
 
         $students->save();
         return redirect()->route('student.index');
