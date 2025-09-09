@@ -10,10 +10,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([
-            JobCategorySeeder::class, // ✅ Added
-            JobSeeder::class, // ✅ Added
-        ]);
+        // $this->call([
+        //     JobCategorySeeder::class, // ✅ Added
+        //     JobSeeder::class, // ✅ Added
+        // ]);
         
     $this->call(CourseSeeder::class);
     $this->call(StudentSeeder::class);

@@ -18,11 +18,13 @@ class StudentController extends Controller
     public function create()
     {
         $courses = Course::all();
-        return view('Student.create', compact('courses'));
+        $students = Student::all();
+        return view('Student.create', compact('courses','students'));
     }
 
     public function store(Request $request)
     {
+        
 
         $request->validate(
             [
@@ -51,14 +53,14 @@ class StudentController extends Controller
         $students->course_id = $request->course_id;
 
         $students->save();
-        return redirect()->route('student.index');
+        return redirect()->back();
     }
 
     public function edit($id)
     {
         $courses = Course::all();
         $student = Student::find($id);
-        return view('Student.edit', compact('student','courses'));
+        return view('Student.edit', compact('student', 'courses'));
     }
 
     public function update(Request $request, $id)

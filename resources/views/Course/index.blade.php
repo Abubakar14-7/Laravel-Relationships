@@ -65,11 +65,16 @@
     <tr>
         <td>{{ $course->id }}</td>
         <td>{{ $course->name }}</td>
-        <td>{{ $course->description }}</td>
         <td>{{ $course->duration }}</td>
         <td>{{ $course->fee }}</td>
         <td>
+            <a href="{{ route('course.detail', $course->id) }}" class="action-btn edit">
+                 {{ $course->students ? $course->students->count() : 0 }}
+            </a>
+        </td>
+        <td>
             <a href="{{ route('course.edit', $course->id) }}" class="action-btn edit">Edit</a>
+            <a href="{{ route('course.detail', $course->id) }}" class="action-btn edit">Detail</a>
             <a href="{{ route('course.delete', $course->id) }}" class="action-btn delete" onclick="return confirm('Are you sure?')">Delete</a>
         </td>
     </tr>

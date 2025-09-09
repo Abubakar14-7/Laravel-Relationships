@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\Student;
 
 class CourseController extends Controller
 {
@@ -55,6 +56,13 @@ class CourseController extends Controller
 
         $courses=Course::find($id);
         return view('Course.edit',compact('courses'));
+    }
+
+    public function detail($id){
+
+        $course = Course::find($id);
+        $students = Student::where('course_id',$id)->get();
+        return view('Course.detail',compact('course','students'));
     }
 
         public function update(Request $request , $id){
