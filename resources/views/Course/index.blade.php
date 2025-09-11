@@ -56,9 +56,9 @@
     <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Description</th>
         <th>Duration</th>
         <th>Fee</th>
+        <th>Enroll</th>
         <th>Actions</th>
     </tr>
     @foreach($courses as $course)
