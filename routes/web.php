@@ -11,6 +11,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::middleware('agechecker')->group(function () {
+
+
+    
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -52,10 +57,22 @@ Route::get('/students/delete/{id}', [StudentController::class, 'delete'])->name(
 
 
 // Courses CRUD
-Route::get('/courses', [CourseController::class, 'index'])->name('course.index');     
+Route::get('/courses', [CourseController::class, 'index'])->name('course.index');
 Route::get('/course/create', [CourseController::class, 'create'])->name('course.create'); 
 Route::post('/course/store', [CourseController::class, 'store'])->name('course.store');   
 Route::get('/course/edit/{id}', [CourseController::class, 'edit'])->name('course.edit');  
 Route::get('/course/detail/{id}', [CourseController::class, 'detail'])->name('course.detail');  
 Route::post('/course/update/{id}', [CourseController::class, 'update'])->name('course.update');   
 Route::get('/course/delete/{id}', [CourseController::class, 'delete'])->name('course.delete'); 
+
+
+
+
+   
+});
+
+
+
+Route::get('/checkage/{age}', [CourseController::class, 'agechecker'])->name('course.age')->middleware('agechecker');     
+
+Route::get('/blocked', [CourseController::class, 'blockuser'])->name('user.block');
