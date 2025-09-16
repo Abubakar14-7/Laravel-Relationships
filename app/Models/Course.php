@@ -8,6 +8,6 @@ class Course extends Model
 {
     public function students()
     {
-        return $this->hasMany(\App\Models\Student::class, 'course_id', 'id');
+        return $this->hasMany(Student::class,'course_id','id');
     }
 }
