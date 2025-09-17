@@ -6,13 +6,14 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 
-Route::middleware('agechecker')->group(function () {
+// Route::middleware('agechecker')->group(function () {
 
 
     
@@ -68,8 +69,20 @@ Route::get('/course/delete/{id}', [CourseController::class, 'delete'])->name('co
 
 
 
-   
+
+Route::prefix('users')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('users.index');     // List all users
+    Route::get('/create', [UserController::class, 'create'])->name('users.create'); // Show add form
+    Route::post('/', [UserController::class, 'store'])->name('users.store');    // Save new user
+    Route::get('/{id}/edit', [UserController::class, 'edit'])->name('users.edit');  // Show edit form
+    Route::put('/{id}', [UserController::class, 'update'])->name('users.update');   // Update user
+    Route::delete('/{id}', [UserController::class, 'destroy'])->name('users.destroy'); // Delete user
 });
+
+
+
+   
+// });
 
 
 
